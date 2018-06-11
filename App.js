@@ -1,26 +1,34 @@
 // react libraries
 import React from 'react';
 
-// react-native libraries
-import { StyleSheet, Text, View } from 'react-native';
+// third-libraries
+import { StackNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>MOOV </Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+// screens
+import { LandingPage } from "./src/screens";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+// components
+import { FirstPage } from "./src/component/Registrstion";
+
+const AppNavigator = StackNavigator({
+	LandingPage: {
+		screen: LandingPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
+	FirstPage: {
+		screen: FirstPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
+}, {
+	navigationOptions: {
+		header: 'screen',
+	}
 });
+
+
+export default () =>
+	<AppNavigator />
