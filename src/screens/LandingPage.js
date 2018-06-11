@@ -2,26 +2,47 @@
 import React from 'react';
 
 // react-native libraries
-import {
-	Dimensions,
-	ImageBackground,
-	TouchableOpacity,
-	Image,
-	View,
-	Platform
-} from 'react-native';
+import { Dimensions, ImageBackground, Platform } from 'react-native';
 
 // third-party libraries
-import { Container, Content, Text, Body, CardItem, Card } from 'native-base';
+import { Container, Content, Body, CardItem, Card } from 'native-base';
 import * as Animatable from 'react-native-animatable';
+import { NavigationActions } from 'react-navigation';
 
 // component
 import { StatusBarComponent, Texts } from "../common";
 
 class LandingPage extends React.Component {
 	
+	/**
+	 * newUser
+	 *
+	 * checks for active user and navigate
+	 */
+	newUser = () => {
+		this.navigateToRegistrationPage();
+	};
+	
+	/**
+	 * newUser
+	 *
+	 * navigates user to registration page
+	 */
+	navigateToRegistrationPage = () => {
+		const resetAction = NavigationActions.reset({
+			index: 0,
+			actions: [
+				NavigationActions.navigate({ routeName: 'FirstPage'})
+			],
+			key: null // THIS LINE
+		});
+		
+		this.props.navigation.dispatch(resetAction)
+	};
+	
 	render() {
 		let { height, width } = Dimensions.get('window');
+		
 		return (
 			<Container style={{ backgroundColor: '#ffffff' }}>
 				<StatusBarComponent hidden backgroundColor='#fff' barStyle="dark-content" />
@@ -35,10 +56,14 @@ class LandingPage extends React.Component {
 				>
 					{/*<Content/>*/}
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
-						<TouchableOpacity>
+						<Animatable.View
+							animation="fadeOut"
+							delay={6300}
+							onAnimationEnd={this.newUser}
+						>
 							<Animatable.Image
 								animation="fadeInDownBig"
-								// animation="slideInDown" iterationCount={1} direction="alternate"
+								delay={1700}
 								style={{
 									alignItems: 'center',
 									height: height / 5.5,
@@ -48,103 +73,109 @@ class LandingPage extends React.Component {
 								}}
 								source={require('../../assests/appLogo.png')}
 							/>
-						</TouchableOpacity>
+						</Animatable.View>
 					</Content>
 					<Content contentContainerStyle={{
 						// flex: 1,
 						alignItems: 'center',
 					}}>
-						<TouchableOpacity>
+						<Animatable.View
+							animation="fadeInUpBig"
+							delay={2000}
+						>
 							<Animatable.View
-								animation="fadeInUpBig"
+								animation="fadeOut"
+								delay={6300}
+								onAnimationEnd={this.newUser}
 							>
-								<Animatable.View
-									animation="wobble"
-									delay={4900}
-									iterationCount={20}
-								>
-								
-									<Card style={{marginTop: 10,
-										borderRightColor: '#ed1a68',
-										borderLeftColor: '#fdbf55',
-										borderRadius: 10,
-										borderWidth: 5,
-									}}>
-											<CardItem
-												style={{
-													marginTop: 10,
-													flexDirection: 'column',
-													marginLeft: 10,
-													marginBottom: 5,
-													borderColor: 'blue',
-													alignItems: 'center'
-												}}
-											>
-												<Body
-													style={{
-														marginBottom: 5,
-														flexDirection: 'row',
-													}}>
-												<Texts
-													animation="fadeIn"
-													delay={1000}
-													text="We"
-													textColor='#fdb456'
-													fontWeight='700'
-												/>
-												<Texts
-													animation="fadeIn"
-													delay={1300}
-													text={`${' '} will`}
-													textColor='#f9945b'
-													fontWeight='700'
-												/>
-												<Texts
-													animation="fadeIn"
-													delay={1700}
-													text={`${' '} Help`}
-													textColor='#f77a5d'
-													fontWeight='700'
-												/>
-												<Texts
-													animation="fadeIn"
-													delay={2000}
-													text={`${' '} you`}
-													textColor='#f35462'
-													fontWeight='700'
-												/>
-												<Texts
-													animation="fadeIn"
-													delay={2300}
-													text={`${' '} get`}
-													textColor='#f24064'
-													fontWeight='700'
-												/>
-												<Texts
-													animation="fadeIn"
-													delay={2700}
-													text={`${' '} there`}
-													textColor='#f45e61'
-													fontWeight='700'
-												/>
-												<Texts
-													animation="fadeIn"
-													delay={3000}
-													text={`${' '} faster!`}
-													textColor='#f03664'
-													fontWeight='900'
-												/>
-												</Body>
-											</CardItem>
-									</Card>
-								</Animatable.View>
+								<Card style={{marginTop: 10,
+									borderRadius: 0,
+									borderWidth: 0,
+									borderColor: 'white',
+								}}>
+									<CardItem
+										style={{
+											marginTop: 10,
+											flexDirection: 'column',
+											marginLeft: 10,
+											marginBottom: 5,
+											alignItems: 'center',
+											borderColor: 'white',
+											borderRadius: 10,
+											borderWidth: 2,
+											shadowOffset: { height: 2, width: 3 },
+											shadowOpacity: 0,
+											elevation:0
+										}}
+									>
+										<Body
+											style={{
+												marginBottom: 5,
+												flexDirection: 'row',
+											}}>
+											<Texts
+												animation="fadeIn"
+												delay={2300}
+												text="We"
+												textColor='#fdb456'
+												fontWeight='700'
+											/>
+											<Texts
+												animation="fadeIn"
+												delay={2600}
+												text={`${' '} will`}
+												textColor='#f9945b'
+												fontWeight='700'
+											/>
+											<Texts
+												animation="fadeIn"
+												delay={2900}
+												text={`${' '} help`}
+												textColor='#f77a5d'
+												fontWeight='700'
+											/>
+											<Texts
+												animation="fadeIn"
+												delay={3100}
+												text={`${' '} you`}
+												textColor='#f35462'
+												fontWeight='700'
+											/>
+											<Texts
+												animation="fadeIn"
+												delay={3400}
+												text={`${' '} get`}
+												textColor='#f24064'
+												fontWeight='700'
+											/>
+											<Texts
+												animation="fadeIn"
+												delay={3700}
+												text={`${' '} there`}
+												textColor='#f45e61'
+												fontWeight='700'
+											/>
+											<Texts
+												animation="fadeIn"
+												delay={4000}
+												text={`${' '} Faster!`}
+												textColor='#f03664'
+												fontWeight='900'
+											/>
+										</Body>
+									</CardItem>
+								</Card>
 							</Animatable.View>
-						</TouchableOpacity>
+						</Animatable.View>
 					</Content>
-					<TouchableOpacity onPress={this.appNavigation}>
+					<Animatable.View
+						animation="fadeOut"
+						delay={6300}
+						onAnimationEnd={this.newUser}
+					>
 						<Animatable.Image
 							animation="fadeInLeftBig"
-							delay={3300}
+							delay={4300}
 							styleName="medium"
 							style={{
 								marginLeft: Platform.OS === 'ios' ? width / 4 : width / 3.3,
@@ -153,7 +184,7 @@ class LandingPage extends React.Component {
 							}}
 							source={require('../../assests/moov-car-side.png')}
 						/>
-					</TouchableOpacity>
+					</Animatable.View>
 				</ImageBackground>
 			</Container>
 		);
