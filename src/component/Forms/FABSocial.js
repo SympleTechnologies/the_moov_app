@@ -23,7 +23,7 @@ class FABSocial extends Component {
 					style={{ backgroundColor: '#ffc653' }}
 					position="topRight"
 					onPress={() => this.setState({ active: !this.state.active })}>
-					<Icon name="more-horizontal" type="Feather" />
+					<Icon name={this.state.active ? "more-vertical" : "more-horizontal"} type="Feather" />
 					<Button style={{ backgroundColor: '#3B5998' }}>
 						<Icon name="logo-facebook" />
 					</Button>

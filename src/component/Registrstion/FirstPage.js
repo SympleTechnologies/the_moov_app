@@ -193,9 +193,9 @@ class FirstPage extends React.Component {
 							passwordValue={this.state.password}
 							confirmPasswordValue={this.state.confirmPassword}
 							
-							onChangeFirstNameText={firstName => this.setState({ firstName })}
-							onChangeLastNameText={lastName => this.setState({ lastName })}
-							onChangeEmailText={email => this.setState({ email })}
+							onChangeFirstNameText={firstName => this.setState({ firstName: firstName.trim()  })}
+							onChangeLastNameText={lastName => this.setState({ lastName: lastName.trim()  })}
+							onChangeEmailText={email =>  this.setState({ email: email.trim() })}
 							onChangePasswordText={password => this.setState({ password })}
 							onChangeConfirmPasswordText={confirmPassword => this.setState({ confirmPassword })}
 							
