@@ -130,7 +130,7 @@ class FirstPage extends React.Component {
 		
 		return (
 			<Container style={{ backgroundColor: '#ffffff' }}>
-				<StatusBarComponent backgroundColor='#fff' barStyle="dark-content" />
+				<StatusBarComponent hidden backgroundColor='#fff' barStyle="dark-content" />
 				<ImageBackground
 					style={{
 						height: height,
@@ -198,7 +198,8 @@ class FirstPage extends React.Component {
 							onChangeEmailText={email => this.setState({ email })}
 							onChangePasswordText={password => this.setState({ password })}
 							onChangeConfirmPasswordText={confirmPassword => this.setState({ confirmPassword })}
-						
+							
+							onSubmit={this.submitForm}
 						/>
 						
 						{/*Button*/}

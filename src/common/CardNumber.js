@@ -15,15 +15,15 @@ const CardNumber = ({ number }) => {
 			<Card
 				style={{
 					marginTop: Platform.OS === 'ios' ? 10 : 5,
-					marginBottom: Platform.OS === 'ios' ? 5 : 5,
+					marginBottom: Platform.OS === 'ios' ? 5 : 10,
 					marginRight: 0,
 					borderColor: '#ebebeb',
-					width: width / 10,
+					width: Platform.OS === 'ios' ? width / 10 :width / 9,
 				}}
 			>
 				<CardItem
 					style={{
-						height: Platform.OS === 'ios' ? height / 17 : height / 15.5,
+						height: Platform.OS === 'ios' ? height / 17 : height / 13.5,
 					}}
 				>
 					<Body>
@@ -31,7 +31,7 @@ const CardNumber = ({ number }) => {
 						style={{
 							marginTop: Platform.OS === 'ios' ? 4 : 0,
 							color: '#f9a24f',
-							fontWeight: '800',
+							fontWeight: '900',
 							fontFamily: Fonts.GothamRounded
 						}}>{number}</Text>
 					</Body>
