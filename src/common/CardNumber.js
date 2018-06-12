@@ -6,6 +6,7 @@ import { Dimensions, Platform, StatusBar, View} from 'react-native'
 
 // third-party libraries
 import { Body, CardItem, Card, Text } from 'native-base';
+import {Fonts} from "../utils/Font";
 
 const CardNumber = ({ number }) => {
 	let { height, width } = Dimensions.get('window');
@@ -13,7 +14,7 @@ const CardNumber = ({ number }) => {
 		<View>
 			<Card
 				style={{
-					marginTop: Platform.OS === 'ios' ? 5 : 5,
+					marginTop: Platform.OS === 'ios' ? 10 : 5,
 					marginBottom: Platform.OS === 'ios' ? 5 : 5,
 					marginRight: 0,
 					borderColor: '#ebebeb',
@@ -26,7 +27,13 @@ const CardNumber = ({ number }) => {
 					}}
 				>
 					<Body>
-					<Text style={{ color: '#f9a24f', fontWeight: '800' }}>{number}</Text>
+					<Text
+						style={{
+							marginTop: Platform.OS === 'ios' ? 4 : 0,
+							color: '#f9a24f',
+							fontWeight: '800',
+							fontFamily: Fonts.GothamRounded
+						}}>{number}</Text>
 					</Body>
 				</CardItem>
 			</Card>

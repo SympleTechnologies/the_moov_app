@@ -7,6 +7,9 @@ import { ScrollView, Dimensions, Platform } from 'react-native'
 // third-party libraries
 import { Item, Input, Icon } from 'native-base';
 
+// fonts
+import { Fonts } from "../../utils/Font";
+
 const BasicInformation =
 	({
     firstNameValue,
@@ -47,7 +50,7 @@ const BasicInformation =
 					value={firstNameValue}
 					onChangeText={onChangeFirstNameText}
 					autoCapitalize='none'
-					style={{ fontWeight: '100'}}
+					style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded }}
 				/>
 			</Item>
 			<Item style={{ borderWidth: 1, borderColor: '#b1b1b1' }}>
@@ -64,7 +67,7 @@ const BasicInformation =
 					value={lastNameValue}
 					onChangeText={onChangeLastNameText}
 					autoCapitalize='none'
-					// style={{ fontWeight: '100'}}
+					style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded }}
 				/>
 			</Item>
 			<Item style={{ borderWidth: 1, borderColor: '#b3b4b4' }}>
@@ -80,7 +83,7 @@ const BasicInformation =
 					value={emailValue}
 					onChangeText={onChangeEmailText}
 					autoCapitalize='none'
-					// style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded}}
+					style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded }}
 				/>
 			</Item>
 			<Item>
@@ -98,7 +101,7 @@ const BasicInformation =
 					value={passwordValue}
 					onChangeText={onChangePasswordText}
 					autoCapitalize='none'
-					// style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded}}
+					style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded}}
 				/>
 			</Item>
 			<Item>
@@ -116,7 +119,7 @@ const BasicInformation =
 					value={confirmPasswordValue}
 					onChangeText={onChangeConfirmPasswordText}
 					autoCapitalize='none'
-					// style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded}}
+					style={{ fontWeight: '100', fontFamily: Fonts.GothamRounded}}
 				/>
 			</Item>
 		</ScrollView>

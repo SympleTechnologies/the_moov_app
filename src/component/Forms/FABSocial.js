@@ -9,7 +9,7 @@ class FABSocial extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			active: true
+			active: false
 		};
 	}
 	

@@ -13,6 +13,10 @@ import { StatusBarComponent, CardNumber } from "../../common";
 // forms
 import { BasicInformation, FABSocial } from "../Forms";
 
+// fonts
+import { Fonts } from "../../utils/Font";
+
+
 class FirstPage extends React.Component {
 	
 	state = {
@@ -213,7 +217,13 @@ class FirstPage extends React.Component {
 							block
 							dark>
 						
-								<Text uppercase={false} style={{ color: '#df5559', fontWeight: '900' }}>
+								<Text
+									uppercase={false}
+									style={{
+										color: '#df5559',
+										fontWeight: '900',
+										fontFamily: Fonts.GothamRounded
+									}}>
 									Next
 								</Text>
 						</Button>
@@ -227,9 +237,10 @@ class FirstPage extends React.Component {
 								justifyContent: 'center'
 							}}>
 							<Text style={{
-								color: '#9b9b9b',
+								color: '#b4b4b4',
 								fontSize: 12,
-								// fontFamily: Fonts.GothamRounded
+								fontWeight: '400',
+								fontFamily: Fonts.GothamRoundedLight
 							}}>
 								
 								Do you have an account?
@@ -242,7 +253,7 @@ class FirstPage extends React.Component {
 										color: '#f00266',
 										fontSize: 12,
 										fontWeight: '900',
-										// fontFamily: Fonts.GothamRounded
+										fontFamily: Fonts.GothamRounded
 									}}> Sign In</Text>
 							</TouchableOpacity>
 						</Content>
@@ -261,12 +272,14 @@ const styles = StyleSheet.create({
 	getText: {
 		fontSize: 25,
 		color: '#ffc653',
-		fontWeight: '400'
+		fontWeight: '400',
+		fontFamily: Fonts.GothamRounded
 	},
 	moovingText: {
 		fontSize: 25,
 		color: '#d3000d',
-		fontWeight: '400'
+		fontWeight: '400',
+		fontFamily: Fonts.GothamRounded
 	},
 	activityIndicator: {
 		flex: 1,
