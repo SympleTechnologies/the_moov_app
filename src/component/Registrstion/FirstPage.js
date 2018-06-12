@@ -207,7 +207,7 @@ class FirstPage extends React.Component {
 								width: width / 1.5,
 								height: height / 13,
 								marginLeft: width / 5.6,
-								marginTop: Platform.OS === 'ios' ? 30 : 15,
+								marginTop: Platform.OS === 'ios' ? 30 : height / 20,
 								backgroundColor: '#fff',
 								borderWidth: 1.3,
 								borderColor: '#d3000d',
@@ -231,7 +231,7 @@ class FirstPage extends React.Component {
 						{/*Sign In link*/}
 						<Content
 							contentContainerStyle={{
-								marginTop: Platform.OS === 'ios' ? 30 : 15,
+								marginTop: Platform.OS === 'ios' ? 30 : height / 20,
 								flexDirection: 'row',
 								alignItems: 'center',
 								justifyContent: 'center'
