@@ -33,15 +33,28 @@ class FirstPage extends React.Component {
 		
 		if(this.validateFields()) {
 			this.successMessage('YAY!')
-			// navigate('SecondPage', {
-			// 	firstName: this.state.firstName,
-			// 	lastName: this.state.lastName,
-			// 	email: this.state.email,
-			// 	password: this.state.password,
-			// 	imgURL: '',
-			// 	authentication_type: "email",
-			// });
+			navigate('SecondPage', {
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				password: this.state.password,
+				imgURL: '',
+				authentication_type: "email",
+			});
 		}
+	};
+	
+	
+	/**
+	 * signInPage
+	 *
+	 * navigates to sign-ip page
+	 * @return {void}
+	 */
+	signInPage = () => {
+		const { navigate } = this.props.navigation;
+		
+		navigate('SignInPage');
 	};
 	
 	/**
@@ -120,7 +133,7 @@ class FirstPage extends React.Component {
 						width: width,
 						flex: 1
 					}}
-					source={require('../../../assests/registration_BP.png')}
+					source={require('../../../assets/registration_BP.png')}
 				>
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
 						
@@ -133,7 +146,7 @@ class FirstPage extends React.Component {
 								borderRadius: 8,
 								marginTop: Platform.OS === 'ios' ? height / 10 : height / 15
 							}}
-							source={require('../../../assests/appLogo.png')}
+							source={require('../../../assets/appLogo.png')}
 						/>
 						
 						{/*Heading text*/}
@@ -190,7 +203,7 @@ class FirstPage extends React.Component {
 								width: width / 1.5,
 								height: height / 13,
 								marginLeft: width / 5.6,
-								marginTop: 30,
+								marginTop: Platform.OS === 'ios' ? 30 : 15,
 								backgroundColor: '#fff',
 								borderWidth: 1.3,
 								borderColor: '#d3000d',
@@ -208,7 +221,7 @@ class FirstPage extends React.Component {
 						{/*Sign In link*/}
 						<Content
 							contentContainerStyle={{
-								marginTop: 30,
+								marginTop: Platform.OS === 'ios' ? 30 : 15,
 								flexDirection: 'row',
 								alignItems: 'center',
 								justifyContent: 'center'
@@ -222,7 +235,7 @@ class FirstPage extends React.Component {
 								Do you have an account?
 							</Text>
 							<TouchableOpacity
-								// onPress={this.signInPage}
+								onPress={this.signInPage}
 							>
 								<Text
 									style={{
