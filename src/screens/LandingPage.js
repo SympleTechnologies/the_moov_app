@@ -54,7 +54,8 @@ class LandingPage extends React.Component {
 					}}
 					source={require('../../assests/landing_BP.png')}
 				>
-					{/*<Content/>*/}
+					
+					{/*Moov Icon*/}
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
 						<Animatable.View
 							animation="fadeOut"
@@ -75,10 +76,12 @@ class LandingPage extends React.Component {
 							/>
 						</Animatable.View>
 					</Content>
-					<Content contentContainerStyle={{
-						// flex: 1,
-						alignItems: 'center',
-					}}>
+					
+					{/*Welcome text*/}
+					<Content
+						contentContainerStyle={{
+							alignItems: 'center',
+						}}>
 						<Animatable.View
 							animation="fadeInUpBig"
 							delay={2000}
@@ -168,6 +171,8 @@ class LandingPage extends React.Component {
 							</Animatable.View>
 						</Animatable.View>
 					</Content>
+					
+					{/*Moov car */}
 					<Animatable.View
 						animation="fadeOut"
 						delay={6300}

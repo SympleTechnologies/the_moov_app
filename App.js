@@ -3,6 +3,7 @@ import React from 'react';
 
 // third-libraries
 import { StackNavigator } from 'react-navigation';
+import { Root } from 'native-base';
 
 // screens
 import { LandingPage } from "./src/screens";
@@ -11,12 +12,12 @@ import { LandingPage } from "./src/screens";
 import { FirstPage } from "./src/component/Registrstion";
 
 const AppNavigator = StackNavigator({
-	LandingPage: {
-		screen: LandingPage,
-		navigationOptions: {
-			header: null,
-		}
-	},
+	// LandingPage: {
+	// 	screen: LandingPage,
+	// 	navigationOptions: {
+	// 		header: null,
+	// 	}
+	// },
 	FirstPage: {
 		screen: FirstPage,
 		navigationOptions: {
@@ -31,4 +32,6 @@ const AppNavigator = StackNavigator({
 
 
 export default () =>
-	<AppNavigator />
+	<Root>
+		<AppNavigator />
+	</Root>
