@@ -2,8 +2,10 @@
 import React from 'react';
 
 // third-party libraries
-import { Text } from 'native-base';
 import * as Animatable from 'react-native-animatable';
+
+// fonts
+import { Fonts } from "../utils/Font";
 
 const Texts = ({ animation, delay, text, textColor, fontWeight }) => {
 	return (
@@ -14,7 +16,8 @@ const Texts = ({ animation, delay, text, textColor, fontWeight }) => {
 				marginBottom: 5,
 				fontSize: 15,
 				color:textColor,
-				fontWeight: fontWeight
+				fontWeight: fontWeight,
+				fontFamily: Fonts.GothamRounded
 			}}
 		>
 			{text}

@@ -2,6 +2,11 @@
   "name": "moovapp",
   "version": "0.1.0",
   "private": true,
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "devDependencies": {
     "babel-preset-react-native-stage-0": "^1.0.1",
     "jest": "^23.1.0",

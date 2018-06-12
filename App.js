@@ -3,12 +3,13 @@ import React from 'react';
 
 // third-libraries
 import { StackNavigator } from 'react-navigation';
+import { Root } from 'native-base';
 
 // screens
-import { LandingPage } from "./src/screens";
+import { LandingPage, SignInPage } from "./src/screens";
 
 // components
-import { FirstPage } from "./src/component/Registrstion";
+import { FirstPage, SecondPage } from "./src/component/Registrstion";
 
 const AppNavigator = StackNavigator({
 	LandingPage: {
@@ -23,6 +24,18 @@ const AppNavigator = StackNavigator({
 			header: null,
 		}
 	},
+	SecondPage: {
+		screen: SecondPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
+	SignInPage: {
+		screen: SignInPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
 }, {
 	navigationOptions: {
 		header: 'screen',
@@ -31,4 +44,6 @@ const AppNavigator = StackNavigator({
 
 
 export default () =>
-	<AppNavigator />
+	<Root>
+		<AppNavigator />
+	</Root>

@@ -52,9 +52,10 @@ class LandingPage extends React.Component {
 						width: width,
 						flex: 1
 					}}
-					source={require('../../assests/landing_BP.png')}
+					source={require('../../assets/landing_BP.png')}
 				>
-					{/*<Content/>*/}
+					
+					{/*Moov Icon*/}
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
 						<Animatable.View
 							animation="fadeOut"
@@ -71,14 +72,16 @@ class LandingPage extends React.Component {
 									borderRadius: 25,
 									marginTop: height / 10
 								}}
-								source={require('../../assests/appLogo.png')}
+								source={require('../../assets/appLogo.png')}
 							/>
 						</Animatable.View>
 					</Content>
-					<Content contentContainerStyle={{
-						// flex: 1,
-						alignItems: 'center',
-					}}>
+					
+					{/*Welcome text*/}
+					<Content
+						contentContainerStyle={{
+							alignItems: 'center',
+						}}>
 						<Animatable.View
 							animation="fadeInUpBig"
 							delay={2000}
@@ -168,6 +171,8 @@ class LandingPage extends React.Component {
 							</Animatable.View>
 						</Animatable.View>
 					</Content>
+					
+					{/*Moov car */}
 					<Animatable.View
 						animation="fadeOut"
 						delay={6300}
@@ -182,7 +187,7 @@ class LandingPage extends React.Component {
 								height: Platform.OS === 'ios' ? 90 :  height / 7.3,
 								width:  Platform.OS === 'ios' ? 270 : width / 1.5,
 							}}
-							source={require('../../assests/moov-car-side.png')}
+							source={require('../../assets/moov-car-side.png')}
 						/>
 					</Animatable.View>
 				</ImageBackground>
