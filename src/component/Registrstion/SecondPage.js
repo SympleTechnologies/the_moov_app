@@ -67,10 +67,10 @@ class SecondPage extends React.Component {
 	 *
 	 * fetches all school
 	 */
-	getAllSchool = () => {
+	getAllSchool = async () => {
 		this.setState({ loading: !this.state.loading });
 		
-		axios.get(`https://moov-backend-staging.herokuapp.com/api/v1/all_schools`)
+		await axios.get(`https://moov-backend-staging.herokuapp.com/api/v1/all_schools`)
 			.then((response) => {
 				this.setState({
 					schools: response.data.data.schools,
