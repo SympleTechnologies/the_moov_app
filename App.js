@@ -9,7 +9,7 @@ import { Root } from 'native-base';
 import { LandingPage, SignInPage } from "./src/screens";
 
 // components
-import { FirstPage, SecondPage } from "./src/component/Registrstion";
+import { FirstPage,  SecondPage, FinalPage } from "./src/component/Registrstion";
 
 const AppNavigator = StackNavigator({
 	LandingPage: {
@@ -26,6 +26,12 @@ const AppNavigator = StackNavigator({
 	},
 	SecondPage: {
 		screen: SecondPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
+	FinalPage: {
+		screen: FinalPage,
 		navigationOptions: {
 			header: null,
 		}
