@@ -2,15 +2,17 @@
 import React from 'react';
 
 // react-native libraries
-import { Dimensions, ImageBackground, StyleSheet, Platform, Image, ScrollView } from 'react-native';
+import { Dimensions, ImageBackground, StyleSheet, Platform, Image, ScrollView, AsyncStorage } from 'react-native';
 
 // third-party libraries
-import { Container, Text, Content, Button } from 'native-base';
+import {Container, Text, Content, Button, Toast} from 'native-base';
 import * as Animatable from 'react-native-animatable';
 import PhoneInput from "react-native-phone-input";
+import * as axios from 'axios';
+import { NavigationActions } from 'react-navigation';
 
 // component
-import { StatusBarComponent, CardNumber } from "../../common";
+import {StatusBarComponent, CardNumber, LoadingPage} from "../../common";
 
 // fonts
 import { Fonts } from "../../utils/Font";
@@ -39,10 +41,9 @@ class FinalPage extends React.Component {
 	 * componentDidMount
 	 *
 	 * React life-cycle method sets user token
-	 * @return {void}
 	 */
 	componentDidMount() {
-		this.refs.phone.focus()
+		this.refs.phone.focus();
 		
 		this.setState({
 			firstName: this.props.navigation.state.params.firstName,
@@ -54,7 +55,7 @@ class FinalPage extends React.Component {
 			userAuthID: this.props.navigation.state.params.userAuthID,
 			authentication_type: this.props.navigation.state.params.authentication_type,
 			selectedSchool: this.props.navigation.state.params.selectedSchool,
-		})
+		});
 	};
 	
 	/**
@@ -63,20 +64,121 @@ class FinalPage extends React.Component {
 	 * signs user up on the moov platform
 	 */
 	signUpUser = () => {
-		this.setState({ loading: !this.state.loading });
 		this.setState({
 			isValidPhoneNumber: this.refs.phone.isValidNumber(),
 			type: this.refs.phone.getNumberType(),
 			phoneNumber: this.refs.phone.getValue()
-		});
+		}, () => this.verifyPhoneNumber());
 	};
 	
+	/**
+	 * verifyPhoneNumber
+	 *
+	 * verifies user phone number
+	 */
+	verifyPhoneNumber = () => {
+		if(this.state.isValidPhoneNumber) {
+			this.setState({ loading: !this.state.loading });
+			this.signUpWithEmailAndPassword();
+		} else {
+			this.errorMessage(`Invalid phone number`)
+		}
+	};
+	
+	/**
+	 * errorMessage
+	 *
+	 * displays error message to user using toast
+	 * @param errorMessage
+	 * return {void}
+	 */
+	errorMessage = (errorMessage) => {
+		Toast.show({ text: `${errorMessage}`, type: "danger", position: 'top' })
+	};
+	
+	/**
+	 * successMessage
+	 *
+	 * displays success message to user using toast
+	 * @param successMessage
+	 * return {void}
+	 */
+	successMessage = (successMessage) => {
+		Toast.show({ text: `${successMessage}`, type: "success", position: 'top' })
+	};
+	
+	/**
+	 * signUpWithEmailAndPassword
+	 *
+	 * signs up users using email and password
+	 * @return {void}
+	 */
+	signUpWithEmailAndPassword  = async () => {
+		await axios.post('https://moov-backend-staging.herokuapp.com/api/v1/signup', {
+			"password": this.state.password,
+			"user_type": "student",
+			"firstname":  this.state.firstName ,
+			"lastname": this.state.lastName,
+			"email": this.state.email,
+			"mobile_number": this.state.phoneNumber,
+			"school": this.state.selectedSchool,
+			"authentication_type": this.state.authentication_type
+		})
+			.then((response) => {
+				this.successMessage(`${response.data.data.message}`);
+				this.saveTokenToLocalStorage(response.data.data.token)
+					.then(this.navigateUserTo('Moov'))
+			})
+			.catch((error) => {
+				this.errorMessage(`${error.response.data.data.message}`);
+				this.setState({ loading: !this.state.loading });
+			});
+	};
+	
+	/**
+	 * saveTokenToLocalStorage
+	 *
+	 * saves user's token to phone storage
+	 */
+	saveTokenToLocalStorage = async (token) => {
+		try {
+			await AsyncStorage.setItem("token", token)
+		} catch (error) {
+			// Error saving data
+		}
+	};
+	
+	/**
+	 * navigateUserTo
+	 *
+	 * navigate user to MOOV page
+	 * @param {string} screen - screen name
+	 */
+	navigateUserTo = (screen) => {
+		this.setState({ loading: !this.state.loading });
+		
+		const resetAction = NavigationActions.reset({
+			index: 0,
+			actions: [
+				NavigationActions.navigate({ routeName: screen })
+			],
+			key: null // THIS LINE
+		});
+		
+		this.props.navigation.dispatch(resetAction)
+	};
 	
 	
 	render() {
 		console.log(this.state);
 		const { getText, moovingText } = styles;
 		let { height, width } = Dimensions.get('window');
+		
+		if(this.state.loading) {
+			return (
+				<LoadingPage />
+			)
+		}
 		
 		return (
 			<Container style={{ backgroundColor: '#ffffff' }}>
@@ -87,7 +189,7 @@ class FinalPage extends React.Component {
 						width: width,
 						flex: 1
 					}}
-					source={require('../../../assets/registration_BP.png')}
+					source={require('../../../assets/images/registration_BP.png')}
 				>
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
 						
@@ -100,7 +202,7 @@ class FinalPage extends React.Component {
 								borderRadius: 8,
 								marginTop: Platform.OS === 'ios' ? height / 10 : height / 15
 							}}
-							source={require('../../../assets/appLogo.png')}
+							source={require('../../../assets/images/appLogo.png')}
 						/>
 						
 						{/*Heading text*/}

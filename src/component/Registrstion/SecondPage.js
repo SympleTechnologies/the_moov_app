@@ -153,7 +153,7 @@ class SecondPage extends React.Component {
 						width: width,
 						flex: 1
 					}}
-					source={require('../../../assets/registration_BP.png')}
+					source={require('../../../assets/images/registration_BP.png')}
 				>
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
 						
@@ -166,7 +166,7 @@ class SecondPage extends React.Component {
 								borderRadius: 8,
 								marginTop: Platform.OS === 'ios' ? height / 10 : height / 15
 							}}
-							source={require('../../../assets/appLogo.png')}
+							source={require('../../../assets/images/appLogo.png')}
 						/>
 						
 						{/*Heading text*/}

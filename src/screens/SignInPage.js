@@ -52,7 +52,7 @@ class SignInPage extends React.Component {
 						width: width,
 						flex: 1
 					}}
-					source={require('../../assets/landing_BP.png')}
+					source={require('../../assets/images/landing_BP.png')}
 				>
 				</ImageBackground>
 			</Container>
