@@ -161,8 +161,8 @@ class FirstPage extends React.Component {
 								marginTop: Platform.OS === 'ios' ? 20 : 10
 							}}
 						>
-							<Text style={getText}>Let's</Text>
-							<Text style={moovingText}> moov!</Text>
+							<Text style={getText}>Get</Text>
+							<Text style={moovingText}> mooving!</Text>
 						</Content>
 						
 						{/*Progress bar*/}

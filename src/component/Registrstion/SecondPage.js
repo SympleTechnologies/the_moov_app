@@ -88,7 +88,17 @@ class SecondPage extends React.Component {
 	 */
 	submitForm = () => {
 		const { navigate } = this.props.navigation;
-		navigate('FinalPage');
+		navigate('FinalPage', {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			email: this.state.email,
+			password: this.state.password,
+			imgURL: this.state.imgURL,
+			socialEmail: this.state.socialEmail,
+			userAuthID: this.state.userAuthID,
+			authentication_type: this.state.authentication_type,
+			selectedSchool: this.state.selectedSchool === '' ? this.state.schools[0].name : this.state.selectedSchool
+		});
 		
 		Toast.show({ text: `Yay!`, type: "success", position: 'top' })
 	};

@@ -2,11 +2,12 @@
 import React from 'react';
 
 // react-native libraries
-import { Dimensions, ImageBackground, StyleSheet, Platform, Image} from 'react-native';
+import { Dimensions, ImageBackground, StyleSheet, Platform, Image, ScrollView } from 'react-native';
 
 // third-party libraries
 import { Container, Text, Content, Button } from 'native-base';
 import * as Animatable from 'react-native-animatable';
+import PhoneInput from "react-native-phone-input";
 
 // component
 import { StatusBarComponent, CardNumber } from "../../common";
@@ -15,6 +16,62 @@ import { StatusBarComponent, CardNumber } from "../../common";
 import { Fonts } from "../../utils/Font";
 
 class FinalPage extends React.Component {
+	
+	state = {
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: '',
+		imgURL: '',
+		socialEmail: '',
+		userAuthID: '',
+		authentication_type: '',
+		selectedSchool: '',
+		
+		isValidPhoneNumber: '',
+		type: '',
+		phoneNumber: '',
+		
+		loading: false,
+	};
+	
+	/**
+	 * componentDidMount
+	 *
+	 * React life-cycle method sets user token
+	 * @return {void}
+	 */
+	componentDidMount() {
+		this.refs.phone.focus()
+		
+		this.setState({
+			firstName: this.props.navigation.state.params.firstName,
+			lastName: this.props.navigation.state.params.lastName,
+			email: this.props.navigation.state.params.email,
+			password: this.props.navigation.state.params.password,
+			imgURL: this.props.navigation.state.params.imgURL,
+			socialEmail: this.props.navigation.state.params.socialEmail,
+			userAuthID: this.props.navigation.state.params.userAuthID,
+			authentication_type: this.props.navigation.state.params.authentication_type,
+			selectedSchool: this.props.navigation.state.params.selectedSchool,
+		})
+	};
+	
+	/**
+	 * signUpUser
+	 *
+	 * signs user up on the moov platform
+	 */
+	signUpUser = () => {
+		this.setState({ loading: !this.state.loading });
+		this.setState({
+			isValidPhoneNumber: this.refs.phone.isValidNumber(),
+			type: this.refs.phone.getNumberType(),
+			phoneNumber: this.refs.phone.getValue()
+		});
+	};
+	
+	
 	
 	render() {
 		console.log(this.state);
@@ -73,7 +130,7 @@ class FinalPage extends React.Component {
 								animation="fadeInLeftBig"
 								style={{
 									marginTop: Platform.OS === 'ios' ? 10 : 20,
-									width: width / 3
+									width: width / 1.49
 								}}
 							>
 								<Content
@@ -88,26 +145,65 @@ class FinalPage extends React.Component {
 							
 							{/*Card 2*/}
 							<Animatable.View animation="fadeInLeftBig">
-								<CardNumber number={2} />
+								<CardNumber number={3} />
 							</Animatable.View>
+						
+						</Content>
+						
+						{/*Body*/}
+						<Content
+							contentContainerStyle={{
+								marginTop: height / 6,
+							}}
+						>
 							
-							{/*Right bar*/}
-							<Animatable.View
-								animation="fadeIn"
-								delay={600}
+							{/*Select preferred institute*/}
+							<Text
 								style={{
-									marginTop: Platform.OS === 'ios' ? 10 : 20,
-									width: width / 3
+									color: '#e0ddde',
+									fontFamily: Fonts.GothamRounded,
+									fontWeight: '400',
+									textAlign: 'center',
+								}}
+							>Enter Mobile Phone Number</Text>
+							
+							{/*Phone Number component*/}
+							<Content
+								contentContainerStyle={{
+									marginTop: 22,
+									width: width / 1.25,
+									height: height / 10,
+									borderColor: '#b1b1b1',
+									borderWidth: 1,
+									backgroundColor: '#fff',
+									flexDirection: 'row',
+									
+									alignItems: 'center',
+									justifyContent: 'center'
 								}}
 							>
-								<Content
+								<ScrollView
 									contentContainerStyle={{
-										borderWidth: Platform.OS === 'ios' ? 0.6 : 0.7,
-										borderColor: '#e3dfe0',
-										marginTop: Platform.OS === 'ios' ? 20 : 10,
-										marginBottom: 10,
-									}} />
-							</Animatable.View>
+										marginLeft: 15,
+									}}>
+									<PhoneInput
+										ref='phone'
+										textStyle={{
+											color: '#b0b0b0',
+											fontFamily: Fonts.GothamRounded,
+											fontWeight: '400',
+											fontSize: 17
+										}}
+										initialCountry='ng'
+										autoFocus
+										allowZeroAfterCountryCode
+										textProps={{
+											returnKeyType: "done",
+											onSubmitEditing: () => this.signUpUser()
+										}}
+									/>
+								</ScrollView>
+							</Content>
 						
 						</Content>
 						
@@ -124,7 +220,7 @@ class FinalPage extends React.Component {
 								borderRadius: 8,
 								zIndex: 1,
 							}}
-							onPress={this.submitForm}
+							onPress={this.signUpUser}
 							block
 							dark>
 							

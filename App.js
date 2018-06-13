@@ -12,12 +12,12 @@ import { LandingPage, SignInPage } from "./src/screens";
 import { FirstPage,  SecondPage, FinalPage } from "./src/component/Registrstion";
 
 const AppNavigator = StackNavigator({
-	LandingPage: {
-		screen: LandingPage,
-		navigationOptions: {
-			header: null,
-		}
-	},
+	// LandingPage: {
+	// 	screen: LandingPage,
+	// 	navigationOptions: {
+	// 		header: null,
+	// 	}
+	// },
 	FirstPage: {
 		screen: FirstPage,
 		navigationOptions: {
