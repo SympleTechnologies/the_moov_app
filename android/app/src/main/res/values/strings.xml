@@ -1,4 +1,4 @@
 <resources>
-
+    <string name="facebook_app_id">183234889062916</string>
     <string name="app_name">Moov</string>
 </resources>

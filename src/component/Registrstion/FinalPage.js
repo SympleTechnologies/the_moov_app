@@ -79,7 +79,12 @@ class FinalPage extends React.Component {
 	verifyPhoneNumber = () => {
 		if(this.state.isValidPhoneNumber) {
 			this.setState({ loading: !this.state.loading });
-			this.signUpWithEmailAndPassword();
+			// this.signUpWithEmailAndPassword();
+			if(this.state.authentication_type === 'email') {
+				this.signUpWithEmailAndPassword();
+			} else {
+				this.signUpWithSocialAuth();
+			}
 		} else {
 			this.errorMessage(`Invalid phone number`)
 		}
@@ -105,6 +110,35 @@ class FinalPage extends React.Component {
 	 */
 	successMessage = (successMessage) => {
 		Toast.show({ text: `${successMessage}`, type: "success", position: 'top' })
+	};
+	
+	/**
+	 * signUpWithSocialAuth
+	 *
+	 * signs up users using social auth
+	 * @return {void}
+	 */
+	signUpWithSocialAuth  = async () => {
+		await axios.post('https://moov-backend-staging.herokuapp.com/api/v1/signup', {
+			"password": this.state.userAuthID,
+			"user_type": "student",
+			"firstname":  this.state.firstName ,
+			"lastname": this.state.lastName,
+			"email": this.state.socialEmail,
+			"image_url": this.state.imgURL,
+			"mobile_number": this.state.phoneNumber,
+			"school": this.state.selectedSchool,
+			"authentication_type": this.state.authentication_type
+		})
+			.then((response) => {
+				this.successMessage(`${response.data.data.message}`)
+				this.saveTokenToLocalStorage(response.data.data.token)
+					.then(this.navigateUserTo('Moov'))
+			})
+			.catch((error) => {
+				this.errorMessage(`${error.response.data.data.message}`)
+				this.setState({ loading: !this.state.loading });
+			});
 	};
 	
 	/**
