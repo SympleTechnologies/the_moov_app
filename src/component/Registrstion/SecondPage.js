@@ -67,10 +67,10 @@ class SecondPage extends React.Component {
 	 *
 	 * fetches all school
 	 */
-	getAllSchool = () => {
+	getAllSchool = async () => {
 		this.setState({ loading: !this.state.loading });
 		
-		axios.get(`https://moov-backend-staging.herokuapp.com/api/v1/all_schools`)
+		await axios.get(`https://moov-backend-staging.herokuapp.com/api/v1/all_schools`)
 			.then((response) => {
 				this.setState({
 					schools: response.data.data.schools,
@@ -88,7 +88,17 @@ class SecondPage extends React.Component {
 	 */
 	submitForm = () => {
 		const { navigate } = this.props.navigation;
-		navigate('FinalPage');
+		navigate('FinalPage', {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			email: this.state.email,
+			password: this.state.password,
+			imgURL: this.state.imgURL,
+			socialEmail: this.state.socialEmail,
+			userAuthID: this.state.userAuthID,
+			authentication_type: this.state.authentication_type,
+			selectedSchool: this.state.selectedSchool === '' ? this.state.schools[0].name : this.state.selectedSchool
+		});
 		
 		Toast.show({ text: `Yay!`, type: "success", position: 'top' })
 	};
@@ -143,7 +153,7 @@ class SecondPage extends React.Component {
 						width: width,
 						flex: 1
 					}}
-					source={require('../../../assets/registration_BP.png')}
+					source={require('../../../assets/images/registration_BP.png')}
 				>
 					<Content contentContainerStyle={{ alignItems: 'center'}}>
 						
@@ -156,7 +166,7 @@ class SecondPage extends React.Component {
 								borderRadius: 8,
 								marginTop: Platform.OS === 'ios' ? height / 10 : height / 15
 							}}
-							source={require('../../../assets/appLogo.png')}
+							source={require('../../../assets/images/appLogo.png')}
 						/>
 						
 						{/*Heading text*/}

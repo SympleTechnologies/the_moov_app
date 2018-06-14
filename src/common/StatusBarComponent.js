@@ -12,6 +12,6 @@ const StatusBarComponent = ({ backgroundColor, barStyle, hidden }) => {
       backgroundColor={backgroundColor}
     />
   )
-}
+};
 
 export { StatusBarComponent };

@@ -6,7 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import { Root } from 'native-base';
 
 // screens
-import { LandingPage, SignInPage } from "./src/screens";
+import { LandingPage, Moov, SignInPage } from "./src/screens";
 
 // components
 import { FirstPage,  SecondPage, FinalPage } from "./src/component/Registrstion";
@@ -14,6 +14,12 @@ import { FirstPage,  SecondPage, FinalPage } from "./src/component/Registrstion"
 const AppNavigator = StackNavigator({
 	LandingPage: {
 		screen: LandingPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
+	SignInPage: {
+		screen: SignInPage,
 		navigationOptions: {
 			header: null,
 		}
@@ -36,8 +42,8 @@ const AppNavigator = StackNavigator({
 			header: null,
 		}
 	},
-	SignInPage: {
-		screen: SignInPage,
+	Moov: {
+		screen: Moov,
 		navigationOptions: {
 			header: null,
 		}
