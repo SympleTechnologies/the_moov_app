@@ -15,18 +15,18 @@ import { FirstPage,  SecondPage, FinalPage } from "./src/component/Registrstion"
 import { FABSocial } from "./src/component/Forms";
 
 const AppNavigator = StackNavigator({
-	// LandingPage: {
-	// 	screen: LandingPage,
-	// 	navigationOptions: {
-	// 		header: null,
-	// 	}
-	// },
-	// SignInPage: {
-	// 	screen: SignInPage,
-	// 	navigationOptions: {
-	// 		header: null,
-	// 	}
-	// },
+	LandingPage: {
+		screen: LandingPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
+	SignInPage: {
+		screen: SignInPage,
+		navigationOptions: {
+			header: null,
+		}
+	},
 	FirstPage: {
 		screen: FirstPage,
 		navigationOptions: {

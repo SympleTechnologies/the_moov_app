@@ -2,7 +2,16 @@
 import React from 'react';
 
 // react-native libraries
-import { Dimensions, ImageBackground, StyleSheet, Platform, Image, TouchableOpacity, View } from 'react-native';
+import {
+	Dimensions,
+	ImageBackground,
+	StyleSheet,
+	Platform,
+	Image,
+	TouchableOpacity,
+	View,
+	Keyboard
+} from 'react-native';
 
 // third-party libraries
 import { Container, Text, Content, Button, Toast } from 'native-base';
@@ -138,6 +147,7 @@ class FirstPage extends React.Component {
 	 * toggles loading state
 	 */
 	toggleSpinner = () => {
+		() => Keyboard.dismiss()
 		this.setState({
 			loading: !this.state.loading
 		})
@@ -288,6 +298,7 @@ class FirstPage extends React.Component {
 						
 						{/*Social Auth*/}
 						<FABSocial
+							onPress={() => Keyboard.dismiss()}
 							navigate={this.props.navigation}
 							toggleSpinner={this.toggleSpinner}
 						/>
