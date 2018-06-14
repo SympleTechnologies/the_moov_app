@@ -52,7 +52,7 @@ class FABSocial extends Component {
 			await GoogleSignin.hasPlayServices({ autoResolve: true });
 			
 			await GoogleSignin.configure({
-				iosClientId: '365082073509-5071c4nc1306fh1mu7ka4hj0evhr85e4.apps.googleusercontent.com',
+				iosClientId: '840588850714-7e3h4fqt98vlm4d5ml4j9c7c21q2mo3d.apps.googleusercontent.com',
 				webClientId: '840588850714-7gj2or93l68me32o2nc46qb9e7u50t8i.apps.googleusercontent.com',
 				offlineAccess: false
 			});
@@ -284,7 +284,7 @@ class FABSocial extends Component {
 	googleSignIn = () => {
 		this.setState({ loading: !this.state.loading });
 		GoogleSignin.configure({
-			iosClientId: '365082073509-5071c4nc1306fh1mu7ka4hj0evhr85e4.apps.googleusercontent.com'
+			iosClientId: '840588850714-7e3h4fqt98vlm4d5ml4j9c7c21q2mo3d.apps.googleusercontent.com'
 		})
 			.then(() => {
 				GoogleSignin.signIn()
