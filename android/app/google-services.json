@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "840588850714",
+    "firebase_url": "https://moovapp-8c94e.firebaseio.com",
+    "project_id": "moovapp-8c94e",
+    "storage_bucket": "moovapp-8c94e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840588850714:android:8ec6078c1511394e",
+        "android_client_info": {
+          "package_name": "com.moovapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840588850714-7gj2or93l68me32o2nc46qb9e7u50t8i.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "840588850714-7gj2or93l68me32o2nc46qb9e7u50t8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhLZJcrf_G3yM2oCwlQ9OxnFCejVzuoXU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

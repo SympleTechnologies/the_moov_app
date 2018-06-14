@@ -28,6 +28,26 @@
 				<string>fb183234889062916</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.googleusercontent.apps.840588850714-7e3h4fqt98vlm4d5ml4j9c7c21q2mo3d</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.840588850714-7e3h4fqt98vlm4d5ml4j9c7c21q2mo3d</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>sympleInc.moovapp.student</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sympleInc.moovapp.student</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

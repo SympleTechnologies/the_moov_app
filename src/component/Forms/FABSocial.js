@@ -8,6 +8,7 @@ import FBSDK from "react-native-fbsdk";
 import * as axios from 'axios';
 import {AsyncStorage} from "react-native";
 import { NavigationActions } from 'react-navigation';
+import { GoogleSignin } from 'react-native-google-signin';
 
 // Facebook
 const { AccessToken } = FBSDK;
@@ -27,6 +28,43 @@ class FABSocial extends Component {
 		userAuthID: '',
 		authentication_type: '',
 	};
+	
+	/**
+	 * componentDidMount
+	 *
+	 * React life-cycle method
+	 * @return {void}
+	 */
+	componentDidMount() {
+		LoginManager.logOut();
+		this.googleSignOut();
+		this.setupGoogleSignin().then();
+	}
+	
+	/**
+	 * setupGoogleSignin
+	 *
+	 * Initialize google auth
+	 * @return {Promise<void>}
+	 */
+	async setupGoogleSignin() {
+		try {
+			await GoogleSignin.hasPlayServices({ autoResolve: true });
+			
+			await GoogleSignin.configure({
+				iosClientId: '840588850714-7e3h4fqt98vlm4d5ml4j9c7c21q2mo3d.apps.googleusercontent.com',
+				webClientId: '840588850714-7gj2or93l68me32o2nc46qb9e7u50t8i.apps.googleusercontent.com',
+				offlineAccess: false
+			});
+			
+			const user = await GoogleSignin.currentUserAsync();
+			console.log(user);
+		}
+		catch (err) {
+			console.log("Google signin error", err.code, err.message);
+		}
+	}
+	
 	
 	/**
 	 * handleFacebookLogin
@@ -163,6 +201,26 @@ class FABSocial extends Component {
 	};
 	
 	/**
+	 * checkErrorMessage
+	 *
+	 * checks error message from the server for right navigation
+	 * @param {string} message - Error message from server
+	 * @return {void}
+	 */
+	checkErrorMessage = (message) => {
+		LoginManager.logOut();
+		this.props.toggleSpinner();
+		if(message === 'User does not exist') {
+			this.successMessage(`Yay! Sign-Up`);
+			this.appNavigation('social');
+		} else if(message === 'Invalid email/password') {
+			this.errorMessage(message)
+		} else {
+			this.errorMessage(`Request was not successful`)
+		}
+	};
+	
+	/**
 	 * saveTokenToLocalStorage
 	 *
 	 * saves user's token to phone storage
@@ -195,24 +253,6 @@ class FABSocial extends Component {
 	};
 	
 	/**
-	 * checkErrorMessage
-	 *
-	 * checks error message from the server for right navigation
-	 * @param {string} message - Error message from server
-	 * @return {void}
-	 */
-	checkErrorMessage = (message) => {
-		this.props.toggleSpinner();
-		if(message === 'User does not exist') {
-			this.successMessage(`Yay! Sign-Up`);
-			this.appNavigation('social');
-		} else {
-			LoginManager.logOut();
-			this.errorMessage(`Request was not successful`)
-		}
-	};
-	
-	/**
 	 * appNavigation
 	 *
 	 * @param {string} page - The page the user wants to navigate to
@@ -235,6 +275,58 @@ class FABSocial extends Component {
 		}
 	};
 	
+	/**
+	 * googleSignIn
+	 *
+	 * Signs user in using google login interface
+	 * @return {void}
+	 */
+	googleSignIn = () => {
+		this.setState({ loading: !this.state.loading });
+		GoogleSignin.configure({
+			iosClientId: '840588850714-7e3h4fqt98vlm4d5ml4j9c7c21q2mo3d.apps.googleusercontent.com'
+		})
+			.then(() => {
+				GoogleSignin.signIn()
+					.then((user) => {
+						console.log(user);
+						
+						this.setState({
+							firstName: user.givenName,
+							lastName: user.familyName,
+							socialEmail: user.email,
+							imgURL: user.photo,
+							userAuthID: user.id,
+							authentication_type: "google"
+						}, () => {
+							this.googleSignOut();
+							this.signInWithSocialAuth();
+						});
+						// this.successMessage('Success')
+					})
+					.catch((err) => {
+						this.errorMessage('Failed!');
+					})
+					.done();
+			})
+	};
+	
+	/**
+	 * googleSignIn
+	 *
+	 * Signs user out using google login interface
+	 * @return {void}
+	 */
+	googleSignOut = () => {
+		GoogleSignin.signOut()
+			.then(() => {
+				console.log('out');
+			})
+			.catch((err) => {
+			
+			});
+	};
+	
 	render() {
 		return (
 			<Fab
@@ -248,7 +340,7 @@ class FABSocial extends Component {
 				<Button onPress={this.handleFacebookLogin} style={{ backgroundColor: '#3B5998' }}>
 					<Icon name="logo-facebook" />
 				</Button>
-				<Button style={{ backgroundColor: '#DD5144' }}>
+				<Button onPress={this.googleSignIn} style={{ backgroundColor: '#DD5144' }}>
 					<Icon name="google" type="FontAwesome" />
 				</Button>
 				<Button style={{ backgroundColor: '#1ea0f3' }}>

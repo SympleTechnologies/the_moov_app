@@ -30,6 +30,7 @@
     "react-native": "~0.55.2",
     "react-native-animatable": "^1.3.0",
     "react-native-fbsdk": "^0.7.0",
+    "react-native-google-signin": "^0.12.0",
     "react-native-phone-input": "^0.2.1",
     "react-navigation": "^1.4.0"
   }
