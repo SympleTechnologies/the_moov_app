@@ -2,20 +2,28 @@
 import React from 'react';
 
 // react-native libraries
-import { Dimensions, ImageBackground, StyleSheet, Platform, Image, TouchableOpacity, View } from 'react-native';
+import {
+	Dimensions,
+	ImageBackground,
+	StyleSheet,
+	Platform,
+	Image,
+	TouchableOpacity,
+	View,
+	Keyboard
+} from 'react-native';
 
 // third-party libraries
 import { Container, Text, Content, Button, Toast } from 'native-base';
 
 // component
-import { StatusBarComponent, CardNumber } from "../../common";
+import { StatusBarComponent, CardNumber, LoadingPage } from "../../common";
 
 // forms
 import { BasicInformation, FABSocial } from "../Forms";
 
 // fonts
 import { Fonts } from "../../utils/Font";
-
 
 class FirstPage extends React.Component {
 	
@@ -33,18 +41,9 @@ class FirstPage extends React.Component {
 	 * calls validate method before moving to the next form
 	 */
 	submitForm = () => {
-		const { navigate } = this.props.navigation;
-		
 		if(this.validateFields()) {
-			this.successMessage('YAY!')
-			navigate('SecondPage', {
-				firstName: this.state.firstName,
-				lastName: this.state.lastName,
-				email: this.state.email,
-				password: this.state.password,
-				imgURL: '',
-				authentication_type: "email",
-			});
+			this.successMessage('YAY!');
+			this.appNavigation('email');
 		}
 	};
 	
@@ -56,7 +55,6 @@ class FirstPage extends React.Component {
 	 */
 	signInPage = () => {
 		const { navigate } = this.props.navigation;
-		
 		navigate('SignInPage');
 	};
 	
@@ -122,10 +120,48 @@ class FirstPage extends React.Component {
 		Toast.show({ text: `${successMessage}`, type: "success", position: 'top' })
 	};
 	
+	/**
+	 * appNavigation
+	 *
+	 * @param {string} page - The page the user wants to navigate to
+	 * @return {void}
+	 */
+	appNavigation = (page) => {
+		const { navigate } = this.props.navigation;
+		
+		if (page === 'email') {
+			navigate('SecondPage', {
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				password: this.state.password,
+				imgURL: '',
+				authentication_type: "email",
+			});
+		}
+	};
+	
+	/**
+	 * toggleSpinner
+	 *
+	 * toggles loading state
+	 */
+	toggleSpinner = () => {
+		() => Keyboard.dismiss()
+		this.setState({
+			loading: !this.state.loading
+		})
+	};
+	
 	render() {
-		console.log(this.state);
 		const { getText, moovingText } = styles;
 		let { height, width } = Dimensions.get('window');
+		
+		if(this.state.loading) {
+			return (
+				<LoadingPage />
+			)
+		}
 		
 		return (
 			<Container style={{ backgroundColor: '#ffffff' }}>
@@ -261,7 +297,11 @@ class FirstPage extends React.Component {
 						</Content>
 						
 						{/*Social Auth*/}
-						<FABSocial />
+						<FABSocial
+							onPress={() => Keyboard.dismiss()}
+							navigate={this.props.navigation}
+							toggleSpinner={this.toggleSpinner}
+						/>
 						
 					</Content>
 				</ImageBackground>

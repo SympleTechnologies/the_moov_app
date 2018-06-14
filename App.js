@@ -11,6 +11,9 @@ import { LandingPage, Moov, SignInPage } from "./src/screens";
 // components
 import { FirstPage,  SecondPage, FinalPage } from "./src/component/Registrstion";
 
+// forms
+import { FABSocial } from "./src/component/Forms";
+
 const AppNavigator = StackNavigator({
 	LandingPage: {
 		screen: LandingPage,
@@ -44,6 +47,12 @@ const AppNavigator = StackNavigator({
 	},
 	Moov: {
 		screen: Moov,
+		navigationOptions: {
+			header: null,
+		}
+	},
+	FABSocial: {
+		screen: FABSocial,
 		navigationOptions: {
 			header: null,
 		}
