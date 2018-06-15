@@ -343,9 +343,6 @@ class FABSocial extends Component {
 				<Button onPress={this.googleSignIn} style={{ backgroundColor: '#DD5144' }}>
 					<Icon name="google" type="FontAwesome" />
 				</Button>
-				<Button style={{ backgroundColor: '#1ea0f3' }}>
-					<Icon name="twitter" type="FontAwesome" />
-				</Button>
 			</Fab>
 		);
 	}
