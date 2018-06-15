@@ -147,7 +147,7 @@ class FirstPage extends React.Component {
 	 * toggles loading state
 	 */
 	toggleSpinner = () => {
-		() => Keyboard.dismiss()
+		Keyboard.dismiss();
 		this.setState({
 			loading: !this.state.loading
 		})
@@ -322,12 +322,6 @@ const styles = StyleSheet.create({
 		color: '#d3000d',
 		fontWeight: '400',
 		fontFamily: Fonts.GothamRounded
-	},
-	activityIndicator: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 20
 	},
 });
 

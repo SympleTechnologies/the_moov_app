@@ -2,7 +2,7 @@
 import React from 'react';
 
 // react-native libraries
-import { Dimensions, ImageBackground, Platform } from 'react-native';
+import {AsyncStorage, Dimensions, ImageBackground, Platform} from 'react-native';
 
 // third-party libraries
 import { Container, Content, Body, CardItem, Card } from 'native-base';
@@ -15,12 +15,22 @@ import { StatusBarComponent, Texts } from "../common";
 class LandingPage extends React.Component {
 	
 	/**
-	 * newUser
+	 * isUserLoggedIn
 	 *
-	 * checks for active user and navigate
+	 * checks if user is logged in and then routes user to the right place
+	 * @return {Promise<void>}
 	 */
-	newUser = () => {
-		this.navigateToRegistrationPage();
+	isUserLoggedIn = async () => {
+		try {
+			const value = await AsyncStorage.getItem('token');
+			if (value !== null){
+				this.navigateToRegistrationPage('Moov');
+			} else {
+				this.navigateToRegistrationPage('FirstPage');
+			}
+		} catch (error) {
+			// Error retrieving data
+		}
 	};
 	
 	/**
@@ -28,11 +38,11 @@ class LandingPage extends React.Component {
 	 *
 	 * navigates user to registration page
 	 */
-	navigateToRegistrationPage = () => {
+	navigateToRegistrationPage = (page) => {
 		const resetAction = NavigationActions.reset({
 			index: 0,
 			actions: [
-				NavigationActions.navigate({ routeName: 'FirstPage'})
+				NavigationActions.navigate({ routeName: page})
 			],
 			key: null // THIS LINE
 		});
@@ -60,7 +70,7 @@ class LandingPage extends React.Component {
 						<Animatable.View
 							animation="fadeOut"
 							delay={6300}
-							onAnimationEnd={this.newUser}
+							onAnimationEnd={this.isUserLoggedIn}
 						>
 							<Animatable.Image
 								animation="fadeInDownBig"
